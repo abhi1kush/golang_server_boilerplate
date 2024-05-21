@@ -1,0 +1,5 @@
+# Ignore the binary
+/myapp
+
+# Ignore VCS directories
+.git
