@@ -1,0 +1,5 @@
+./myapp/.vscode
+*.log
+./myapp/build
+./myapp/myapp
+
