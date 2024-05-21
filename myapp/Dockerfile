@@ -29,7 +29,7 @@ COPY --from=builder /app/myapp .
 RUN mkdir /configs
 
 # Copy the configuration files from the builder stage
-COPY --from=builder /app/configs /configs
+COPY --from=builder /app/configs ./configs
 
 # Expose the port on which the application will run
 EXPOSE 8080

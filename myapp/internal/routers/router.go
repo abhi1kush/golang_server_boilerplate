@@ -2,7 +2,8 @@ package routers
 
 import (
 	"myapp/internal/handlers"
-	"myapp/internal/middleware"
+	"myapp/pkg/middleware"
+	"net/http"
 
 	"github.com/gorilla/mux"
 )
@@ -10,12 +11,17 @@ import (
 func NewRouter() *mux.Router {
 	router := mux.NewRouter()
 
-	userHandler := handlers.NewUserHandler()
-	router.HandleFunc("/users", userHandler.GetUsers).Methods("GET")
-
+	router.HandleFunc("/health", healthHandler).Methods("GET")
+	apiRouter := router.PathPrefix("/api").Subrouter()
 	// Apply middleware
-	router.Use(middleware.LoggerMiddleware)
-	router.Use(middleware.AuthMiddleware)
-
+	apiRouter.Use(middleware.LoggerMiddleware)
+	apiRouter.Use(middleware.AuthenticationMiddleware)
+	userHandler := handlers.NewUserHandler()
+	apiRouter.HandleFunc("/users", userHandler.GetUsers).Methods("GET")
 	return router
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("OK"))
 }
