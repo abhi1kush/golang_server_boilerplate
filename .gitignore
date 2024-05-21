@@ -1,5 +1,6 @@
 ./myapp/.vscode
-*.log
+./myapp/*.log
+./myapp/cmd/server/*.log
 ./myapp/build
 ./myapp/myapp
 
