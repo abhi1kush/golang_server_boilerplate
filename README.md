@@ -1,7 +1,7 @@
 # golang_server_boilerplate
 golang server setup with gorrila router.
-
-For building use make build 
+``make build`` 
+Use for building server binary.
 server binary will be generated in build/ directory.
-
-for building docker image use make docker-build.
+``make docker-build``
+for building docker image.
